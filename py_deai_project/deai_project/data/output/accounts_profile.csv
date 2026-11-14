@@ -1,0 +1,10 @@
+column_name,data_type,null_count,actual_count,unique_count,null_percentage
+AccountID,float64,1,50000,49999,0.0
+AccountType,object,0,50000,5,0.0
+Balance,float64,0,50000,49762,0.0
+CreditScore,int64,0,50000,551,0.0
+Currency,object,0,50000,4,0.0
+CustomerID,int64,0,50000,31642,0.0
+DateOpened,object,0,50000,1671,0.0
+ManagerID,int64,0,50000,3000,0.0
+ODLimit,float64,0,50000,48694,0.0

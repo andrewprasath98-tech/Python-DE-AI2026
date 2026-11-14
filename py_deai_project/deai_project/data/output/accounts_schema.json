@@ -1,0 +1,65 @@
+{
+  "dataset_business_purpose": "The dataset captures core banking account details for a financial institution, storing information about customer accounts, their balances, creditworthiness, associated managers, and operational limits.",
+  "recommended_target_table": "fact_accounts",
+  "candidate_primary_key": [
+    "AccountID"
+  ],
+  "recommended_partition_ column": "DateOpened",
+  "business_meaning_and_types": {
+    "AccountID": {
+      "meaning": "Unique identifier for the bank account.",
+      "recommended_target_data_type": "BIGINT",
+      "nullable_evidence": "NOT NULL (1 null value observed in profile/samples due to ingestion artifact, but logically mandatory for identification)."
+    },
+    "AccountType": {
+      "meaning": "The classification of the bank account (e.g., Business, Savings, Checking, FixedDeposit).",
+      "recommended_target_data_type": "VARCHAR(50)",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    },
+    "Balance": {
+      "meaning": "The current monetary amount available in the account.",
+      "recommended_target_data_type": "DECIMAL(18, 2)",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    },
+    "CreditScore": {
+      "meaning": "The credit score associated with the account holder.",
+      "recommended_target_data_type": "INT",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    },
+    "Currency": {
+      "meaning": "The currency denomination of the account balance (e.g., GBP, EUR, USD).",
+      "recommended_target_data_type": "VARCHAR(3)",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    },
+    "CustomerID": {
+      "meaning": "Identifier for the customer who owns the account.",
+      "recommended_target_data_type": "BIGINT",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    },
+    "DateOpened": {
+      "meaning": "The date when the bank account was officially opened.",
+      "recommended_target_data_type": "DATE",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    },
+    "ManagerID": {
+      "meaning": "Identifier for the relationship manager or branch manager overseeing the account.",
+      "recommended_target_data_type": "INT",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    },
+    "ODLimit": {
+      "meaning": "The overdraft limit authorized for the account.",
+      "recommended_target_data_type": "DECIMAL(18, 2)",
+      "nullable_evidence": "NOT NULL (0 nulls observed)."
+    }
+  },
+  "possible_foreign_keys": [
+    "CustomerID (Likely references a customers dimension table)",
+    "ManagerID (Likely references an employees or managers dimension table)"
+  ],
+  "data_quality_concerns": [
+    "AccountID is typed as float64 with trailing decimal zeros (e.g., .0) and contains 1 null/NaN value.",
+    "AccountType contains inconsistent string formatting with trailing spaces (e.g., 'Business ' vs 'Business').",
+    "Currency contains mixed casing (e.g., 'GBP', 'EUR', 'usd', 'USD') requiring normalization to uppercase.",
+    "CustomerID cardinality (31,642 unique out of 50,000 records) indicates that a single customer can own multiple accounts."
+  ]
+}

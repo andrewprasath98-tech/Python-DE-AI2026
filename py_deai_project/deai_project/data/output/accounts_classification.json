@@ -1,0 +1,66 @@
+{
+  "business_domain": "Banking and Financial Services",
+  "dataset_type": "Transactional / Account Master Data",
+  "pii_columns": [],
+  "sensitive_columns": [
+    "CreditScore",
+    "Balance",
+    "ODLimit"
+  ],
+  "identifier_columns": [
+    "AccountID",
+    "CustomerID",
+    "ManagerID"
+  ],
+  "business_measure_columns": [
+    "Balance",
+    "CreditScore",
+    "ODLimit"
+  ],
+  "date_columns": [
+    "DateOpened"
+  ],
+  "categorical_columns": [
+    "AccountType",
+    "Currency"
+  ],
+  "column_classifications": {
+    "AccountID": {
+      "classification": "Identifier",
+      "explanation": "Serves as the unique primary key for identifying individual bank accounts in the system."
+    },
+    "AccountType": {
+      "classification": "Categorical",
+      "explanation": "Defines the classification of the bank account (e.g., Business, Savings, FixedDeposit, Checking) with a limited set of distinct values."
+    },
+    "Balance": {
+      "classification": "Business Measure / Sensitive",
+      "explanation": "Quantifies the monetary value held in the account (financial measure) and is considered financially sensitive data."
+    },
+    "CreditScore": {
+      "classification": "Business Measure / Sensitive",
+      "explanation": "Represents a numerical evaluation of the customer's creditworthiness; acts as a scoring metric and is treated as sensitive financial data."
+    },
+    "Currency": {
+      "classification": "Categorical",
+      "explanation": "Represents the standard ISO currency code (with some casing inconsistencies like 'usd') associated with the account balance."
+    },
+    "CustomerID": {
+      "classification": "Identifier",
+      "explanation": "Uniquely identifies the customer who owns or is associated with the account, acting as a foreign key to a customer entity."
+    },
+    "DateOpened": {
+      "classification": "Date",
+      "explanation": "Records the chronological date when the bank account was officially opened."
+    },
+    "ManagerID": {
+      "classification": "Identifier",
+      "explanation": "Uniquely identifies the relationship manager or bank employee assigned to oversee the account."
+    },
+    "ODLimit": {
+      "classification": "Business Measure / Sensitive",
+      "explanation": "Represents the permitted overdraft limit monetary value for the account, serving as both a financial measure and sensitive credit data."
+    }
+  },
+  "pii_review_notes": "No direct PII (such as names, emails, or phone numbers) is present in this dataset. CustomerID and ManagerID are internal surrogate keys rather than direct personal identifiers, but they link to systems containing PII and should be governed securely."
+}
